@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+
+#Given a list of numbers, return the list with numbers that are above average.
+
+print "Please enter a list of numbers, one per line: \n";
+chomp(my @numberList = <STDIN>);
+# my $average = &determineAverage(\@numberList);
+# print "The List is: (@numberList).\n";
+# print "The Average is: ($average)\n";
+
+# my @aboveAverageList = &aboveAverage(\@aboveAverageList, $average);
+# print "The New List is: (@aboveAverageList).\n";
+
+print @{&above(\@numberList)};
+
+sub determineAverage {
+	my $sum = 0;
+	my @numberList = @{$_[0]};
+	my $listSize = @numberList;
+	foreach $number (@numberList) {
+		$sum += $number;
+	}
+	return $sum / $listSize;
+}
+
+sub aboveAverage {
+	my @newList = [];
+	my @average = $_[1];
+	my @localList = @{$_[0]};
+	foreach $item (@localList) {
+		if ($item > $localAverage) {
+			push(@newList, $item);
+		}
+		else {
+			push(@newList, 33333);
+		}
+	}
+	return @newList;
+}
+
+sub above {
+	my @list = @{$_[0]};
+	my $ave = determineAverage(\@list);
+	my @newList = @list;
+	print "The Average is: " . $ave . "\n";
+
+	print "These are larger than average: ";
+	foreach $i (@newList) {
+		if ($i > $ave) {
+			print "$i ";
+		}
+		else {
+			delete @newList[$i-1];
+		}
+	}
+	print "\nThese are larger than average: ";
+	print @newList;
+
+	return \@newList;
+}
