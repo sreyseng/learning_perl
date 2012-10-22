@@ -3,9 +3,6 @@
 print "Enter in numbers, one per line. CTRL+D for EOF: \n";
 chomp(my @numbers = <STDIN>);
 
-# my $average = &average(@numbers);
-# print "The average is: $average\n";
-
 my @newNumbers = &aboveAverage(@numbers);
 print "newNumbers list returned from function: @newNumbers\n";
 
