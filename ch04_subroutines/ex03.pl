@@ -3,18 +3,18 @@
 print "Enter in numbers, one per line. CTRL+D for EOF: \n";
 chomp(my @numbers = <STDIN>);
 
-my $average = &average(\@numbers);
-print "The average is: $average\n";
+# my $average = &average(@numbers);
+# print "The average is: $average\n";
 
-my @newNumbers = {&aboveAverage(\@numbers, $average)};
-print @newNumbers;
+my @newNumbers = &aboveAverage(@numbers);
+print "newNumbers list returned from function: @newNumbers\n";
 
 #++++++++++++
 # SUBROUTINES
 #++++++++++++
 
 sub average {
-	my @tempNumbers = @{$_[0]};
+	my @tempNumbers = @_;
 	my $tempCount = @tempNumbers;
 	my $sum = 0;
 	foreach $number (@tempNumbers) {
@@ -24,16 +24,17 @@ sub average {
 }
 
 sub aboveAverage {
-	my @tempNumbers = @{$_[0]};
-	my $tempAverage = $_[1];
-	my @tempNewList = [];
+	my @tempNumbers = @_;
+	print "tempNumber list in function: @tempNumbers\n";
+	my $tempAverage = &average(@tempNumbers);
+	print "tempAverage in function: $tempAverage\n";
+	my @tempNewList;
 
 	foreach $number (@tempNumbers) {
 		if ($number > $tempAverage) {
 			push(@tempNewList, $number);
 		}
+		print "tempNewList list in function: @tempNewList\n";
 	}
-	print "INFUNCTION LIST : @{tempNewList}";
-	print "RETURNLIST: @tempNewList";
-	return \@tempNewList;
+	return @tempNewList;
 }
